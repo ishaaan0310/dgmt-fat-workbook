@@ -105,6 +105,11 @@ h3.topic .tn{font:600 .72rem var(--mono);color:var(--mc);letter-spacing:.06em;te
 .tgrid p{margin:0 0 8px;font-size:.93rem}
 .tgrid pre.w{font-size:12.5px;white-space:pre-wrap;margin:0 0 8px}
 
+.concept{background:var(--surface);border:1px dashed color-mix(in srgb,var(--mc) 55%,transparent);border-left:4px solid var(--mc);border-radius:10px;padding:10px 16px 10px;margin:6px 0 10px}
+.concept .ck{font:700 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mc);margin:0 0 4px}
+.concept ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.concept li{font-size:.93rem;line-height:1.55}
+.concept li::marker{color:var(--mc)}
 /* ---------- question card ---------- */
 .q{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:16px 0;overflow:hidden;box-shadow:var(--shadow);scroll-margin-top:16px}
 .q:target{outline:3px solid var(--mark);outline-offset:2px}
@@ -181,6 +186,7 @@ svg .w{fill:var(--accent);font:600 13px var(--mono)}
 
 /* ---------- print: every solution visible, clean pages ---------- */
 @media print{
+  .concept{break-inside:avoid}
   :root{--paper:#fff;--surface:#fff;--raised:#f6f7f8;--shadow:none}
   nav.rail,#totop,#readbar,.reveal{display:none!important}
   .shell{display:block}
@@ -232,7 +238,7 @@ svg .w{fill:var(--accent);font:600 13px var(--mono)}
 <main>
 <header>
 <h1>BMAT205L: past FAT questions by module</h1>
-<p class="lede">Each module starts with a short theory box, then one fully solved past question for every distinct question type that has appeared (Apr 2023 – Nov 2025). Questions of a type you have already seen are not repeated there; they are in <a href="#practice">More practice</a> at the end, with solutions hidden until you ask for them.</p>
+<p class="lede">Each module starts with a short theory box. Then, for every distinct question type, a “Concept used” note and one fully solved past question that has appeared (Apr 2023 – Nov 2025). Questions of a type you have already seen are not repeated there; they are in <a href="#practice">More practice</a> at the end, with solutions hidden until you ask for them.</p>
 <p class="small">Grey lines starting “Read from figure” list the edges or values as read from the photo of the paper. Check them against your copy; the method stays the same if a value differs. Every numerical answer was rechecked by computer.</p>
 </header>
 <section id="index">
@@ -283,6 +289,7 @@ UG: P(y), y arbitrary ⇒ ∀xP(x)   EG: P(c) ⇒ ∃xP(x)
 Order: do ES first, then US with the same c.</pre></div>
 </div></div>
 <h3 class="topic"><span class="tn">Type 1</span>Classify a formula without a truth table</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Replace → and ↔ first (p→q ≡ ¬p∨q), then push ¬ inward with De Morgan.</li><li>Factor with the distributive law, then collapse with negation (p∧¬p ≡ F), identity and absorption.</li><li>Ends in T → tautology; F → contradiction; anything else → contingency.</li><li>Contingency must be justified with one assignment giving T and one giving F.</li><li>Shortcut: (X₁∧X₂)∨(Y₁∧Y₂) ≡ (X₁∨Y₁)∧(X₁∨Y₂)∧(X₂∨Y₁)∧(X₂∨Y₂).</li></ul></div>
 <article class="q" id="c1-5a">
 <div class="qhead"><span class="tag">C1 Q5(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Without a truth table, simplify φ = [(p→q)∧(q→r)] ∨ [(q→p)∧(r→q)] and classify it.</p>
@@ -299,6 +306,7 @@ X₂∨Y₂ = ¬q∨r∨¬r∨q = T</pre>
 <p class="final">φ ≡ (¬p∨q∨¬r)∧(p∨¬q∨r): a contingency (false only for p,q,r = T,F,T and F,T,F).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 2</span>Prove a logical equivalence</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>A ≡ B means A↔B is a tautology: both sides have the same truth value in every row.</li><li>Proof by laws: start from the more complicated side and transform it into the other, one named law per line.</li><li>Most useful laws here: distributive (pull out the common variable), negation, identity, absorption.</li></ul></div>
 <article class="q" id="n24-2a">
 <div class="qhead"><span class="tag">N24 Q2(A)</span><span class="marks">4 marks</span></div>
 <p class="stmt">Prove ((p∨q)∧(p∨¬q))∨q ≡ p∨q.</p>
@@ -309,6 +317,7 @@ X₂∨Y₂ = ¬q∨r∨¬r∨q = T</pre>
 <p class="final">LHS ≡ p∨q ≡ RHS.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 3</span>PDNF and PCNF (by laws and by table)</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Minterm: AND of every variable once (plain or negated). Maxterm: OR of every variable once.</li><li>PDNF = OR of the minterms of the true rows; PCNF = AND of the maxterms of the false rows (signs flipped).</li><li>By laws: reach a DNF, then multiply any term missing x by (x∨¬x) and expand.</li><li>PCNF from PDNF: the minterms missing from S form the PDNF of ¬S; negate that with De Morgan.</li><li>Check: (number of minterms) + (number of maxterms) = 2ⁿ.</li></ul></div>
 <article class="q" id="j23-1a">
 <div class="qhead"><span class="tag">J23 Q1(a)</span><span class="marks">7 marks</span></div>
 <p class="stmt">Obtain the PCNF from the PDNF of S = ((P∧Q)∨R) → ¬P using laws, and validate with a truth table.</p>
@@ -340,6 +349,7 @@ S  = ¬(¬S) = (¬P∨¬Q∨¬R)∧(¬P∨¬Q∨R)∧(¬P∨Q∨¬R)</pre>
 <p class="final">PCNF: (¬P∨¬Q∨¬R)∧(¬P∨¬Q∨R)∧(¬P∨Q∨¬R).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 4</span>Symbolise English with quantifiers</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Fix a domain and define each predicate in words before writing symbols.</li><li>“All A are B” → ∀x(A(x) → B(x)); “Some A are B” → ∃x(A(x) ∧ B(x)). Never ∀ with ∧ or ∃ with →.</li><li>“No one …” = ¬∃x … ≡ ∀x ¬…; “at least one” = ∃.</li><li>A statement about a whole clause (“whenever there is an alert”) is a plain proposition in front of the quantified part.</li></ul></div>
 <article class="q" id="j23-1b">
 <div class="qhead"><span class="tag">J23 Q1(b)</span><span class="marks">3 marks</span></div>
 <p class="stmt">Symbolise: (i) Whenever there is an active alert, all the queued messages are transmitted or rejected. (ii) When everyone is cautious, no one can cheat.</p>
@@ -349,6 +359,7 @@ S  = ¬(¬S) = (¬P∨¬Q∨¬R)∧(¬P∨¬Q∨R)∧(¬P∨Q∨¬R)</pre>
 <p class="final">(i) A → ∀x(Q(x) → (T(x) ∨ R(x))). (ii) ∀x C(x) → ¬∃y H(y).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 5</span>Show a conclusion follows (propositional)</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>An argument is valid if the conclusion is true whenever all premises are true, i.e. (P₁∧…∧Pₙ) → C is a tautology.</li><li>Derivation lines: Rule P (bring in a premise) and Rule T (apply a law or implication to earlier lines).</li><li>Plan backwards from the conclusion: what single line would give it? Then work forwards to reach that line.</li><li>Most used: Modus ponens, Modus tollens, Addition, De Morgan, Simplification.</li></ul></div>
 <article class="q" id="d1-2">
 <div class="qhead"><span class="tag">D1 Q2</span><span class="marks">10 marks</span></div>
 <p class="stmt">Premises: “If the keynote speaker cancelled or the venue booking failed, then the conference will be rescheduled and the proceedings will be delayed.” “If the conference is rescheduled, then registration fees are refunded.” “Registration fees were not refunded.” Conclusion: “The keynote speaker did not cancel.”</p>
@@ -368,6 +379,7 @@ S  = ¬(¬S) = (¬P∨¬Q∨¬R)∧(¬P∨¬Q∨R)∧(¬P∨Q∨¬R)</pre>
 <p class="final">The premises imply ¬K: the keynote speaker did not cancel. The argument is valid.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 6</span>“Can we conclude…? If not, what is correct?”</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>To show a conclusion does NOT follow, give a counterexample: an assignment making every premise true and the conclusion false.</li><li>Then find what does follow by chaining implications with contrapositives and hypothetical syllogism.</li><li>Translate “only if”, “unless”, “necessary” before anything else; these decide the answer.</li></ul></div>
 <article class="q" id="c1-1b">
 <div class="qhead"><span class="tag">C1 Q1(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">(i) If he has dinner, then he does not drink tea. (ii) He eats fruits only if he drinks tea. (iii) He does not take juice unless he eats fruits. Can we conclude that he takes juice whenever he has dinner? If not, what is the correct conclusion?</p>
@@ -385,6 +397,7 @@ S  = ¬(¬S) = (¬P∨¬Q∨¬R)∧(¬P∨¬Q∨R)∧(¬P∨Q∨¬R)</pre>
 <p class="final">No. The correct conclusion is D → ¬J: “If he has dinner, he does not take juice.”</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 7</span>Show premises are inconsistent</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>A set of premises is inconsistent if their conjunction is a contradiction (false in every row).</li><li>Proof: derive some R ∧ ¬R from the premises using Rule P and Rule T.</li><li>The same idea gives indirect proof: add ¬(conclusion) as a premise and derive a contradiction.</li></ul></div>
 <article class="q" id="a23-1">
 <div class="qhead"><span class="tag">A23 Q1</span><span class="tag dup">also TS1 Medium Q8</span><span class="marks">10 marks</span></div>
 <p class="stmt">Prove that the premises a→(b→c), d→(b∧¬c) and a∧d are inconsistent, without a truth table.</p>
@@ -404,6 +417,7 @@ S  = ¬(¬S) = (¬P∨¬Q∨¬R)∧(¬P∨¬Q∨R)∧(¬P∨Q∨¬R)</pre>
 <p class="final">The premises lead to c∧¬c, so they are inconsistent.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 8</span>Derive a conditional with Rule CP</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Rule CP (conditional proof): if P together with R implies S, then P alone implies R → S.</li><li>So to derive R → S, write R as an extra premise (“Rule CP”), derive S, then conclude R → S.</li><li>Use it whenever the conclusion is a conditional.</li></ul></div>
 <article class="q" id="n24-1b">
 <div class="qhead"><span class="tag">N24 Q1(B)</span><span class="marks">4 marks</span></div>
 <p class="stmt">Show that r→s can be derived from ¬r∨p, p→(q→s) and q.</p>
@@ -420,6 +434,7 @@ S  = ¬(¬S) = (¬P∨¬Q∨¬R)∧(¬P∨¬Q∨R)∧(¬P∨Q∨¬R)</pre>
 <p class="final">r → s is derived.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 9</span>Predicate-logic argument</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>US: ∀x P(x) ⇒ P(c) for any c. ES: ∃x P(x) ⇒ P(c) for a NEW constant c.</li><li>UG: P(y) ⇒ ∀x P(x) only if y was arbitrary (came from US). EG: P(c) ⇒ ∃x P(x).</li><li>Do ES before US so both refer to the same c; then use ordinary rules; finish with EG (or UG).</li><li>Template: ES → US → Simplification → MP → Conjunction → EG.</li></ul></div>
 <article class="q" id="c1-1a">
 <div class="qhead"><span class="tag">C1 Q1(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">“All integers are rational numbers. Some integers are a power of 2. Therefore, some rational numbers are a power of 2.” Establish validity.</p>
@@ -458,6 +473,7 @@ Min distance d (= min weight of non-zero codeword):
 Corrects all single errors ⇔ columns of H non-zero and distinct</pre><p>Decoding table: one row per syndrome; coset leader = lightest error with that syndrome. Two leaders of equal weight ⇒ not uniquely decodable.</p></div>
 </div></div>
 <h3 class="topic"><span class="tn">Type 1</span>Operation on a set: which axioms hold?</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Check, in order: closure, associativity, identity, inverse, commutativity.</li><li>To disprove a property, one numerical counterexample is enough.</li><li>The identity must be one fixed element that works for every a (e depending on a ⇒ no identity).</li><li>Inverses only make sense once an identity exists.</li></ul></div>
 <article class="q" id="a23-3a">
 <div class="qhead"><span class="tag">A23 Q3(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">On G = {(α,β) : α,β ∈ ℚ, α ≠ 0} define (α,β)∗(μ,δ) = (αμ, αδ+β). Prove (G,∗) is a semigroup; is ∗ commutative? Find the identity and inverses.</p>
@@ -473,6 +489,7 @@ Corrects all single errors ⇔ columns of H non-zero and distinct</pre><p>Decodi
 <p class="final">Semigroup (in fact a group), not commutative; identity (1,0); (a,b)⁻¹ = (1/a, −b/a).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 2</span>Prove a finite set is a group (Cayley table, orders)</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Uₙ = {a : 1 ≤ a < n, gcd(a,n) = 1} is a group under ×ₙ.</li><li>Cayley table: closure = all entries in the set; identity = row copying the header; inverse = position of e in each row.</li><li>In a group table each element appears exactly once in every row and column (Latin square).</li><li>Order of a = least n with aⁿ = e; it divides |G| (Lagrange). An element of order |G| ⇒ cyclic.</li></ul></div>
 <article class="q" id="d1-4a">
 <div class="qhead"><span class="tag">D1 Q4(a)</span><span class="marks">6 marks</span></div>
 <p class="stmt">G = {x ∈ ℤ₁₂ : gcd(x,12) = 1}. Prove G is a group under multiplication mod 12 and find the order of every element.</p>
@@ -491,6 +508,7 @@ Corrects all single errors ⇔ columns of H non-zero and distinct</pre><p>Decodi
 <p class="final">G is an abelian group. Orders: o(1)=1, o(5)=o(7)=o(11)=2 (Klein four-group, not cyclic).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 3</span>Direct product of groups</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>The direct product A × B uses the operation of A in the first slot and of B in the second.</li><li>Every group property is checked component-wise and is inherited from A and B.</li><li>Identity (e_A, e_B); inverse (a⁻¹, b⁻¹); A × B abelian ⇔ both A and B abelian.</li></ul></div>
 <article class="q" id="n24-3">
 <div class="qhead"><span class="tag">N24 Q3</span><span class="marks">10 marks</span></div>
 <p class="stmt">(A,△) and (B,∗) are abelian groups. On A×B define (a₁,b₁)□(a₂,b₂) = (a₁△a₂, b₁∗b₂). Is (A×B,□) an abelian group?</p>
@@ -503,6 +521,7 @@ Corrects all single errors ⇔ columns of H non-zero and distinct</pre><p>Decodi
 <p class="final">Yes, (A×B, □) is an abelian group.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 4</span>Union of subgroups, cosets, disprove a homomorphism</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>H₁ ∪ H₂ is a subgroup only when one contains the other; counterexample 2ℤ ∪ 3ℤ.</li><li>Left coset aH = {ah : h ∈ H}; two cosets are equal or disjoint; all have |H| elements.</li><li>Number of cosets (index) = |G| / |H| (Lagrange).</li><li>Homomorphism: f(a ∗ b) = f(a)·f(b) for all a, b. Quick test: f(e) must equal e′. One failing pair disproves it.</li></ul></div>
 <article class="q" id="c1-3">
 <div class="qhead"><span class="tag">C1 Q3 (a)(b)(c)</span><span class="marks">3 + 4 + 3 marks</span></div>
 <p class="stmt">(a) Prove or disprove: the union of two subgroups of G is a subgroup. (b) G = (ℤ,+), H = 3ℤ; find the cosets of H. (c) Is f: (ℤ₄,+₄) → (ℤ₁₀,+₁₀), f(x) = 2x, a homomorphism?</p>
@@ -517,6 +536,7 @@ Corrects all single errors ⇔ columns of H non-zero and distinct</pre><p>Decodi
 <p class="final">(a) Disproved by 2ℤ ∪ 3ℤ. (b) 3ℤ, 1+3ℤ, 2+3ℤ. (c) Not a homomorphism.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 5</span>Prove a subgroup and a homomorphism (matrices)</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>GL(2,ℝ) = invertible 2×2 real matrices (det ≠ 0) under matrix multiplication.</li><li>det(AB) = det A · det B and det(A⁻¹) = 1/det A: these do all the work.</li><li>Subgroup test: non-empty, closed under product, closed under inverse (or one-step: AB⁻¹ ∈ H).</li><li>Diagonal matrices multiply entry by entry, so exponentials add: eˣ·eʸ = eˣ⁺ʸ.</li></ul></div>
 <article class="q" id="c2-3">
 <div class="qhead"><span class="tag">C2 Q3 (a)(b)</span><span class="marks">7 + 3 marks</span></div>
 <p class="stmt">(a) Prove H = {A ∈ GL(2,ℝ) : det A = 1} is a subgroup of GL(2,ℝ) under matrix multiplication. (b) f: (ℝ,+) → GL(2,ℝ), f(x) = [[eˣ, 0],[0, e⁻ˣ]]. Prove f is a homomorphism.</p>
@@ -531,6 +551,7 @@ Corrects all single errors ⇔ columns of H non-zero and distinct</pre><p>Decodi
 <p class="final">H (= SL(2,ℝ)) is a subgroup; f(x+y) = f(x)f(y), so f is a homomorphism.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 6</span>Code words from a parity check matrix</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>e: Bᵐ → Bⁿ adds n − m parity bits. With H = [Aᵀ | I], the generator is G = [I | A].</li><li>Code word = message · G (mod 2) = message followed by its parity bits.</li><li>Check any code word c with H·cᵀ = 0.</li><li>Minimum distance d = smallest weight of a non-zero code word; detects d − 1 errors, corrects ⌊(d − 1)/2⌋.</li></ul></div>
 <article class="q" id="j23-4b">
 <div class="qhead"><span class="tag">J23 Q4(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Find the code words generated by H = [1 0 1 0 0 ; 1 1 0 1 0 ; 0 1 0 0 1] with e: B² → B⁵.</p>
@@ -545,6 +566,7 @@ Check 10110 with H: row1 1+1=0, row2 1+0+1=0, row3 0+0=0 ✓</pre>
 <p class="final">Code words: 00000, 01011, 10110, 11101 (minimum weight 3, so single errors can be corrected).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 7</span>Decode received words from a generator matrix</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>From G = [I | A] build H = [Aᵀ | I].</li><li>Syndrome s = H·rᵀ (mod 2), worked row by row.</li><li>s = 0: no error. s = column j of H: flip bit j. s equals no column: two or more errors.</li><li>The original message is the first m bits of the corrected code word.</li></ul></div>
 <article class="q" id="a23-4a">
 <div class="qhead"><span class="tag">A23 Q4(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">G = [1 0 0 1 1 0 ; 0 1 0 0 1 1 ; 0 0 1 1 0 1], e: B³ → B⁶. Using the parity check matrix, decode 011011, 111010, 010100.</p>
@@ -565,6 +587,7 @@ r = 010100: row1 0+0+1 = 1, row2 0+1+0 = 1, row3 1+0+0 = 1   s = 111
 <p class="final">011011 → 010; 111010 → 111; 010100 cannot be decoded uniquely.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 8</span>Build the full decoding table</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>The 2ᵐ code words form a group; its 2ⁿ⁻ᵐ cosets partition Bⁿ.</li><li>Coset leader = a lightest word in the coset; each coset has one syndrome.</li><li>Decoding table: one row per syndrome, leader first, then leader + each code word.</li><li>If two words of the same least weight share a syndrome, words with that syndrome can’t be decoded uniquely.</li></ul></div>
 <article class="q" id="d1-3">
 <div class="qhead"><span class="tag">D1 Q3</span><span class="marks">10 marks</span></div>
 <p class="stmt">H = [1 1 0 1 0 0 ; 1 0 1 0 1 0 ; 1 1 1 0 0 1]. Construct the decoding table; decode 011010, 101110, 111111. Which cannot be decoded uniquely?</p>
@@ -611,6 +634,7 @@ Find c₁, c₂ from initial values on the GENERAL solution.</pre></div>
 1/(1−x)² ↔ n+1   1/(1−x)³ ↔ (n+1)(n+2)/2</pre><p>Steps: multiply by xⁿ, sum, solve for A(x), partial fractions, read off coefficients, check a₀ and a₁.</p></div>
 </div></div>
 <h3 class="topic"><span class="tn">Type 1</span>Selection with a condition (cases)</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Split into disjoint cases by how many of the special items are chosen.</li><li>Within a case multiply (product rule); add the cases (sum rule).</li><li>Check with the complement: total − (cases that fail the condition).</li></ul></div>
 <article class="q" id="j23-5a">
 <div class="qhead"><span class="tag">J23 Q5(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">A Mars crew of 4 astronauts is chosen from 14; exactly 5 of the 14 are trained in exobiology. At least 2 trained members are needed. How many crews?</p>
@@ -625,6 +649,7 @@ Check by complement: C(14,4) − [0T] − [1T] = 1001 − C(9,4) − C(5,1)C(9,3
 <p class="final">455 crews.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 2</span>Stars and bars (repetition from types)</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Choosing r items from k types with repetition, order not mattering = solutions of x₁+…+x_k = r with xᵢ ≥ 0.</li><li>Count = C(r + k − 1, k − 1) (stars and bars).</li><li>“At least a of type i”: set xᵢ = yᵢ + a, then count with r − a.</li><li>“At most b”: add the cases xᵢ = 0, 1, …, b, or subtract “at least b + 1” from the total.</li></ul></div>
 <article class="q" id="a23-4b">
 <div class="qhead"><span class="tag">A23 Q4(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">20 batteries are chosen from 5 types (AAA, AA, C, D, 9-volt). (i) How many ways? (ii) At least four 9-volt? (iii) No more than two 9-volt?</p>
@@ -640,6 +665,7 @@ Total 4641     (check: 10626 − [x5 ≥ 3] = 10626 − C(21,4) = 10626 − 5985
 <p class="final">(i) 10626 (ii) 4845 (iii) 4641.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 3</span>Arrangements: together / apart</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>n distinct objects in a row: n!.</li><li>Must be together: glue them into one block, arrange the blocks, multiply by the internal order.</li><li>Never all together: total − together.</li><li>No two adjacent (gap method): arrange the others, then place the special ones in different gaps: P(gaps, k).</li></ul></div>
 <article class="q" id="n24-4b">
 <div class="qhead"><span class="tag">N24 Q4(B)</span><span class="marks">4 marks</span></div>
 <p class="stmt">In how many ways can 9 people sit in a row if (a) three specific people must always stay together, (b) those three must never stay together?</p>
@@ -650,6 +676,7 @@ Total 4641     (check: 10626 − [x5 ≥ 3] = 10626 − C(21,4) = 10626 − 5985
 <p class="final">(a) 30240 (b) 332640 (or 151200 if no two of them may sit side by side).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 4</span>Counting by complement</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>When the condition says “at least one / at least two the same”, count the complement.</li><li>Total with repetition: nʳ. All different: P(n, r) = n!/(n − r)!.</li><li>Answer = total − all different.</li></ul></div>
 <article class="q" id="c2-2b">
 <div class="qhead"><span class="tag">C2 Q2(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">How many 6-digit ATM passwords (digits 0–9) have at least two digits the same?</p>
@@ -660,6 +687,7 @@ Total 4641     (check: 10626 − [x5 ≥ 3] = 10626 − C(21,4) = 10626 − 5985
 <p class="final">1,000,000 − 151,200 = 848,800.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 5</span>Pigeonhole principle</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>If N objects go into k boxes, some box holds at least ⌈N/k⌉.</li><li>Name the pigeons (objects) and holes (categories) explicitly in your answer.</li><li>Converse form: to force r in one box you need N = k(r − 1) + 1 objects.</li></ul></div>
 <article class="q" id="n24-5b">
 <div class="qhead"><span class="tag">N24 Q5(B)</span><span class="marks">3 marks</span></div>
 <p class="stmt">In a group of 30 people, each has a birthday in one of 12 months. At least how many share the same birth month?</p>
@@ -669,6 +697,7 @@ Total 4641     (check: 10626 − [x5 ≥ 3] = 10626 − C(21,4) = 10626 − 5985
 <p class="final">At least 3 people share a birth month.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 6</span>Inclusion–exclusion with three sets</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>|A∪B∪C| = |A| + |B| + |C| − |A∩B| − |A∩C| − |B∩C| + |A∩B∩C|.</li><li>None = Total − |A∪B∪C|.</li><li>Only A = |A| − |A∩B| − |A∩C| + |A∩B∩C|; fill a Venn diagram from the centre outwards.</li></ul></div>
 <article class="q" id="n24-5a">
 <div class="qhead"><span class="tag">N24 Q5(A)</span><span class="marks">7 marks</span></div>
 <p class="stmt">200 students: Maths 85, Science 70, English 60; M&amp;S 30, M&amp;E 25, S&amp;E 20; all three 15. How many study at least one subject, and how many none?</p>
@@ -679,6 +708,7 @@ Total 4641     (check: 10626 − [x5 ≥ 3] = 10626 − C(21,4) = 10626 − 5985
 <p class="final">155 study at least one subject; 45 study none.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 7</span>Recurrence by undetermined coefficients</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Solution = homogeneous part + particular part.</li><li>Homogeneous: roots of the characteristic equation; distinct r₁, r₂ → c₁r₁ⁿ + c₂r₂ⁿ; double root r → (c₁ + c₂n)rⁿ.</li><li>Particular trial: n → An + B; bⁿ → Abⁿ; n·bⁿ → (An + B)bⁿ. Multiply by nᵐ when b is a root of multiplicity m.</li><li>Use the initial values on the full (general) solution, never on the homogeneous part alone.</li></ul></div>
 <article class="q" id="j23-6">
 <div class="qhead"><span class="tag">J23 Q6</span><span class="marks">10 marks</span></div>
 <p class="stmt">Solve aₙ − 4aₙ₋₁ + 4aₙ₋₂ = 3n + 2ⁿ, a₀ = 1, a₁ = 1, by undetermined coefficients.</p>
@@ -703,6 +733,7 @@ Check n = 2: from recurrence a₂ = 4(1) − 4(1) + 6 + 4 = 10;
 <p class="final">aₙ = (n²/2 + 7n/2 − 11)·2ⁿ + 3n + 12.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 8</span>Recurrence by generating function</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Generating function A(x) = Σ aₙxⁿ turns the recurrence into an algebraic equation for A(x).</li><li>Shifts: Σₙ≥₂ aₙ₋₁xⁿ = x(A − a₀), Σₙ≥₂ aₙ₋₂xⁿ = x²A.</li><li>Series to read back: 1/(1 − ax) ↔ aⁿ; 1/(1 − x)² ↔ n + 1; 1/(1 − x)³ ↔ (n + 1)(n + 2)/2; x/(1 − x)² ↔ n.</li><li>Partial fractions by cover-up (put x = 1/root), then check a₀ and a₁.</li></ul></div>
 <article class="q" id="c1-4">
 <div class="qhead"><span class="tag">C1 Q4</span><span class="marks">10 marks</span></div>
 <p class="stmt">Solve aₙ − 3aₙ₋₁ + 2aₙ₋₂ = n, n ≥ 2, a₀ = 1, a₁ = −1, using a generating function.</p>
@@ -748,6 +779,7 @@ Consensus   xy + x′z + yz = xy + x′z</pre></div>
 <div><h4>SOP, POS, K-map</h4><p>Canonical SOP = sum of minterms where f = 1; canonical POS = product of maxterms where f = 0. K-map: Gray-code order (00, 01, 11, 10); group 1s in rectangles of 1, 2, 4, 8 (wrap around edges allowed), as large as possible; each group gives one product term.</p></div>
 </div></div>
 <h3 class="topic"><span class="tn">Type 1</span>Is a relation a partial order?</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>A partial order is reflexive (aRa), antisymmetric (aRb and bRa ⇒ a = b) and transitive.</li><li>Standard posets: (ℤ, ≤), (ℕ, |), (P(S), ⊆). Strict < is not reflexive.</li><li>One counterexample to any property ⇒ not a poset.</li></ul></div>
 <article class="q" id="n24-7a">
 <div class="qhead"><span class="tag">N24 Q7(A)</span><span class="marks">5 marks</span></div>
 <p class="stmt">S = all people, (x,y) ∈ R if x is not taller than y. Is (S,R) a poset?</p>
@@ -758,6 +790,7 @@ Consensus   xy + x′z + yz = xy + x′z</pre></div>
 <p class="final">Not a poset (antisymmetry fails). It is only a preorder.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 2</span>Hasse diagram under divisibility; is it a lattice?</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>In a divisibility Hasse diagram draw a—b only when b covers a (a | b, nothing in the set between).</li><li>Lattice: every pair needs a lub and a glb inside the set; for divisors these are lcm and gcd.</li><li>If the lcm or gcd of some pair is missing from the set, that pair breaks the lattice.</li></ul></div>
 <article class="q" id="c1-6a">
 <div class="qhead"><span class="tag">C1 Q6(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Draw the Hasse diagram for A = {2,3,6,12,24,36,72} under divisibility and check whether it is a lattice.</p>
@@ -777,6 +810,7 @@ Consensus   xy + x′z + yz = xy + x′z</pre></div>
 <p class="final">Not a lattice: 2 and 3 have no greatest lower bound.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 3</span>Hasse diagram of subsets; maximal and minimal</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>For a family of sets under ⊆, B covers A when A ⊂ B and no set of the family lies strictly between.</li><li>Minimal: nothing in the family below it. Maximal: nothing above it.</li><li>Greatest/least elements exist only when there is a single maximal/minimal element that is comparable to all.</li></ul></div>
 <article class="q" id="a23-7b">
 <div class="qhead"><span class="tag">A23 Q7(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Hasse diagram of ({{1},{2},{4},{1,2},{1,4},{2,4},{3,4},{1,3,4},{2,3,4}}, ⊆); maximal and minimal elements.</p>
@@ -805,6 +839,7 @@ Consensus   xy + x′z + yz = xy + x′z</pre></div>
 <p class="final">Maximal: {1,2}, {1,3,4}, {2,3,4}. Minimal: {1}, {2}, {4}.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 4</span>Read bounds, lub, glb from a Hasse diagram</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Upper bounds of S = elements above (or equal to) every element of S; lub = least of them, if unique.</li><li>Lower bounds and glb are the mirror image.</li><li>Method: write ↑x (everything above x) for each x in S and intersect; same with ↓x for lower bounds.</li><li>Maximal ≠ greatest: two maximal elements ⇒ no greatest element.</li></ul></div>
 <article class="q" id="c2-6">
 <div class="qhead"><span class="tag">C2 Q6</span><span class="marks">10 × 1 mark</span></div>
 <p class="stmt">For the poset in the Hasse diagram find (a) maximal, (b) minimal elements, (c) greatest, (d) least element, (e) upper bounds and (f) lub of {a,b,c}, (g) lower bounds and (h) glb of {f,g,h}, (i) lower bounds of {l,m}, (j) upper bounds of {d}.</p>
@@ -823,6 +858,7 @@ Consensus   xy + x′z + yz = xy + x′z</pre></div>
 <p class="final">(a) l, m (b) a, b, c (c) none (d) none (e) k, l, m (f) k (g) none (h) does not exist (i) a,b,c,d,e,f,g,h,k (j) d,h,i,j,k,l,m.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 5</span>Lattice of divisors: complete, bounded, complemented</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Dₙ (divisors of n) under | is a lattice: a ∨ b = lcm(a,b), a ∧ b = gcd(a,b).</li><li>Bounded by 1 and n; every finite lattice is complete.</li><li>Complement of a must satisfy gcd(a, a′) = 1 and lcm(a, a′) = n.</li><li>Dₙ is complemented (a Boolean algebra) ⇔ n is square-free.</li></ul></div>
 <article class="q" id="d1-6">
 <div class="qhead"><span class="tag">D1 Q6</span><span class="marks">10 marks</span></div>
 <p class="stmt">S₆₀ = divisors of 60, a D b ⇔ a | b. Prove (S₆₀, D) is a lattice. Is it (a) complete (b) bounded (c) complemented? Find the complement of each element.</p>
@@ -840,6 +876,7 @@ Consensus   xy + x′z + yz = xy + x′z</pre></div>
 <p class="final">Lattice, complete and bounded, but not complemented (2, 6, 10, 30 have no complement). Complements: 1↔60, 3↔20, 4↔15, 5↔12.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 6</span>Distributive / complemented from a diagram</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Distributive ⇔ no sublattice shaped like the diamond M₃ or the pentagon N₅.</li><li>To prove failure, compute a ∧ (b ∨ c) and (a ∧ b) ∨ (a ∧ c) for the three middle elements.</li><li>Complement of x: x ∧ x′ = 0 and x ∨ x′ = 1. Test middle elements first; one with none ⇒ not complemented.</li><li>In a distributive lattice complements are unique, so two complements for one element ⇒ not distributive.</li></ul></div>
 <article class="q" id="c1-6b">
 <div class="qhead"><span class="tag">C1 Q6(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Check whether the given lattice is distributive and/or complemented.</p>
@@ -857,6 +894,7 @@ d: elements meeting d in a: a, b;  d ∨ b = c ≠ e     → no complement</pre>
 <p class="final">Not distributive (M₃ sublattice) and not complemented (c and d have no complement).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 7</span>Prove a set is a Boolean algebra</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>A Boolean algebra is a bounded, distributive, complemented lattice.</li><li>Equivalent axiom check: commutative, distributive (both ways), identities 0 and 1, complements a + a′ = 1, a·a′ = 0.</li><li>For divisors of n: + = lcm, · = gcd, 0 = 1, 1 = n, a′ = n/a.</li></ul></div>
 <article class="q" id="d1-7a">
 <div class="qhead"><span class="tag">D1 Q7(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">S = {1,2,3,6}, a+b = lcm(a,b), a·b = gcd(a,b), a′ = 6/a. Show (S, +, ·, ′, 1, 6) is a Boolean algebra.</p>
@@ -874,6 +912,7 @@ d: elements meeting d in a: a, b;  d ∨ b = c ≠ e     → no complement</pre>
 <p class="final">All Boolean algebra axioms hold, so (S, lcm, gcd, ′, 1, 6) is a Boolean algebra (D₆, with 6 = 2·3 square-free).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 8</span>Simplify a Boolean expression; SOP</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Remove outer complements with De Morgan; expand; then absorption x + xy = x and x + x′y = x + y.</li><li>Minimal SOP = fewest product terms and literals.</li><li>Canonical SOP: expand every term to a full minterm (multiply by z + z′). Canonical POS: maxterms where f = 0.</li></ul></div>
 <article class="q" id="c1-7a">
 <div class="qhead"><span class="tag">C1 Q7(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Find the sum of products of ((xy)′z)′ · ((x′ + z)(y′ + z′))′ without a truth table.</p>
@@ -886,6 +925,7 @@ d: elements meeting d in a: a, b;  d ∨ b = c ≠ e     → no complement</pre>
 <p class="final">Minimal SOP xy + xz′; canonical SOP xyz + xyz′ + xy′z′ (m₇ + m₆ + m₄).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 9</span>Simplify with a K-map</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Order rows and columns in Gray code (00, 01, 11, 10) so neighbours differ in one variable.</li><li>Group 1s in rectangles of 1, 2, 4 or 8 cells (edges wrap around); make groups as large as possible.</li><li>A group of 2ᵏ cells drops k variables; keep only the variables constant across the group.</li><li>Every 1 must be covered; overlapping groups are allowed.</li></ul></div>
 <article class="q" id="a23-6a">
 <div class="qhead"><span class="tag">A23 Q6(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Simplify with a K-map: x′y′z′ + xyz + x′y′z + xyz′ + xy′z + x′yz + xy′z′.</p>
@@ -913,6 +953,7 @@ k-regular on n vertices: nk/2 edges</pre><p>Walk: vertices may repeat. Trail: ed
 <div><h4>Dijkstra</h4><p>Source 0, others ∞. Repeat: box the smallest open label; for each neighbour w, label(w) = min(label(w), boxed + weight), note the predecessor. Stop when the target is boxed; trace predecessors back.</p></div>
 </div></div>
 <h3 class="topic"><span class="tn">Type 1</span>Can a graph with this degree sequence exist?</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Handshaking lemma: Σ deg(v) = 2|E|, so the degree sum is even and the number of odd-degree vertices is even.</li><li>A simple graph on n vertices has every degree ≤ n − 1.</li><li>Prove existence by an explicit construction, not only by the parity check.</li></ul></div>
 <article class="q" id="j23-9a">
 <div class="qhead"><span class="tag">J23 Q9(a)</span><span class="marks">4 marks</span></div>
 <p class="stmt">Is it possible to construct a graph with 12 vertices such that 2 vertices have degree 3 and the remaining vertices have degree 4?</p>
@@ -922,6 +963,7 @@ k-regular on n vertices: nk/2 edges</pre><p>Walk: vertices may repeat. Trail: ed
 <p class="final">Yes, possible (degree sum 46 is even; example above).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 2</span>Euler circuit / trail / neither</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Connected graph: Euler circuit ⇔ every degree is even.</li><li>Euler trail but no circuit ⇔ exactly two odd-degree vertices (start at one, finish at the other).</li><li>More than two odd vertices ⇒ neither. Always list the degrees as your justification.</li></ul></div>
 <article class="q" id="j23-9b">
 <div class="qhead"><span class="tag">J23 Q9(b)</span><span class="marks">6 marks</span></div>
 <p class="stmt">Which of graphs (a), (b), (c) has (i) an Eulerian circuit (ii) an Eulerian trail but no circuit (iii) neither?</p>
@@ -935,6 +977,7 @@ k-regular on n vertices: nk/2 edges</pre><p>Walk: vertices may repeat. Trail: ed
 <p class="final">(i) Euler circuit: (c). (ii) Euler trail only: (b). (iii) Neither: (a).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 3</span>Bipartite? Planar?</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Bipartite ⇔ no odd cycle ⇔ 2-colourable. One triangle disproves it.</li><li>Planar connected simple graph: v − e + f = 2 and e ≤ 3v − 6 (e ≤ 2v − 4 without triangles).</li><li>The inequality can only prove non-planarity when it fails; if it holds, look for K₅ or K₃,₃.</li><li>Kuratowski: non-planar ⇔ contains a subdivision of K₅ or K₃,₃ (paths may replace edges).</li></ul></div>
 <article class="q" id="j23-5b">
 <div class="qhead"><span class="tag">J23 Q5(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">(i) Define bipartite and planar. (ii) Check whether the given graph (vertices a–h on a circle) is bipartite and planar.</p>
@@ -947,6 +990,7 @@ k-regular on n vertices: nk/2 edges</pre><p>Walk: vertices may repeat. Trail: ed
 <p class="final">Not bipartite (triangle abh). Not planar (contains a subdivision of K₃,₃, by Kuratowski’s theorem).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 4</span>Construct a graph with a property</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Cut vertex / cut edge (bridge): removing it disconnects the graph. Every edge of a tree is a bridge.</li><li>Eulerian concerns edges (degrees even); Hamiltonian concerns vertices (one cycle through all).</li><li>A cut vertex rules out a Hamiltonian cycle.</li><li>Different edge counts are the quickest proof that graphs are non-isomorphic.</li></ul></div>
 <article class="q" id="c2-8b">
 <div class="qhead"><span class="tag">C2 Q8(b)</span><span class="marks">3 marks</span></div>
 <p class="stmt">Give an example of a graph that is Eulerian but not Hamiltonian.</p>
@@ -957,6 +1001,7 @@ k-regular on n vertices: nk/2 edges</pre><p>Walk: vertices may repeat. Trail: ed
 <p class="final">The bow-tie (two triangles sharing a vertex) is Eulerian but not Hamiltonian.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 5</span>Isomorphism with a mapping (and Euler check)</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Isomorphism: a bijection of vertices that maps edges exactly onto edges.</li><li>Match invariants first (vertices, edges, degree sequence); then map unique-degree vertices first and follow adjacency.</li><li>For dense graphs compare the missing edges instead: non-edges must map to non-edges.</li><li>Proof = the mapping plus a check of every edge.</li></ul></div>
 <article class="q" id="d1-7b">
 <div class="qhead"><span class="tag">D1 Q7(b)</span><span class="marks">3 + 2 marks</span></div>
 <p class="stmt">City A streets: u₁u₂, u₁u₄, u₁u₅, u₂u₃, u₂u₅, u₃u₄, u₃u₅, u₄u₅. City B: v₁v₂, v₁v₃, v₁v₅, v₂v₃, v₂v₄, v₂v₅, v₃v₄, v₄v₅. (i) Verify isomorphism with a mapping. (ii) Can each street be traversed once, returning to the start?</p>
@@ -971,6 +1016,7 @@ u2u5→v3v2 ✓  u3u4→v4v5 ✓  u3u5→v4v2 ✓  u4u5→v5v2 ✓</pre>
 <p class="final">(i) Isomorphic: u₁→v₁, u₂→v₃, u₃→v₄, u₄→v₅, u₅→v₂. (ii) No: four vertices have odd degree, so no Euler circuit.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 6</span>Prove two graphs are NOT isomorphic</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>One differing invariant is enough to prove two graphs are not isomorphic.</li><li>Invariants: vertex and edge counts, degree sequence, adjacency between vertices of given degrees, cycle lengths, number of triangles, connectivity.</li><li>Say exactly which invariant differs and in which vertices.</li></ul></div>
 <article class="q" id="j23-8b">
 <div class="qhead"><span class="tag">J23 Q8(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Are the two graphs G and G′ isomorphic? Give a reason.</p>
@@ -983,6 +1029,7 @@ u2u5→v3v2 ✓  u3u4→v4v5 ✓  u3u5→v4v2 ✓  u4u5→v5v2 ✓</pre>
 <p class="final">Not isomorphic: adjacency between the degree-4 vertices differs.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 7</span>Graph from incidence matrices</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Incidence matrix: rows = vertices, columns = edges; each column has two 1s (the edge’s ends).</li><li>Row sum = degree. Adjacency matrix: aᵢⱼ = 1 if vᵢvⱼ is an edge; symmetric; row sum = degree.</li><li>Draw the graph from the matrix first, then apply the isomorphism checklist.</li></ul></div>
 <article class="q" id="n24-8">
 <div class="qhead"><span class="tag">N24 Q8</span><span class="marks">6 + 4 marks</span></div>
 <p class="stmt">Draw the simple graphs with incidence matrices A = [11100 ; 10010 ; 00101 ; 01011] and B = [01001 ; 01110 ; 10010 ; 10101] (rows = vertices, columns = edges). Are they isomorphic?</p>
@@ -997,6 +1044,7 @@ B: e1 = v3v4, e2 = v1v2, e3 = v2v4, e4 = v2v3, e5 = v1v4</pre>
 <p class="final">Both graphs are K₄ minus an edge; they are isomorphic.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 8</span>Walks with powers of the adjacency matrix</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>(Aᵏ)ᵢⱼ = number of walks of length k from vᵢ to vⱼ.</li><li>(A²)ᵢᵢ = degree of vᵢ; (A²)ᵢⱼ = number of common neighbours.</li><li>Walks may repeat vertices; a path may not. Subtract walks with repeats when the question says “paths”.</li><li>In Kₙ the number of walks of length k is n(n − 1)ᵏ.</li></ul></div>
 <article class="q" id="d1-8">
 <div class="qhead"><span class="tag">D1 Q8</span><span class="marks">1 + 2 + 4 + 3 marks</span></div>
 <p class="stmt">Four terminals A (power source), B (resistor), C (capacitor), D (inductor), each wired to every other. (i) Model as a graph. (ii) Can it be drawn with no crossing wires? (iii) Total walks of length 3. (iv) All Hamiltonian cycles from A.</p>
@@ -1018,6 +1066,7 @@ A–C–B–D–A  (= A–D–B–C–A reversed)</pre>
 <p class="final">K₄; planar; 108 walks of length 3; 3 distinct Hamiltonian cycles from A (6 if direction counts).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 9</span>Dijkstra’s shortest path</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Works for non-negative edge weights.</li><li>Labels: source 0, others ∞. Each round make the smallest temporary label permanent.</li><li>Update each neighbour w: label(w) = min(label(w), permanent label + weight); write the predecessor.</li><li>When the target is permanent, trace predecessors back for the path.</li></ul></div>
 <article class="q" id="c1-8a">
 <div class="qhead"><span class="tag">C1 Q8(a)</span><span class="marks">7 marks</span></div>
 <p class="stmt">Shortest path from a to z.</p>
@@ -1058,6 +1107,7 @@ split inorder at the root, recurse on both sides.</pre></div>
 MST {ab, ae, ed, dc}, weight 6</pre><p>Ties (equal weights) can give several different MSTs with the same total; the notes’ Kruskal example (total 15) has six.</p></div>
 </div></div>
 <h3 class="topic"><span class="tn">Type 1</span>Preorder, inorder, postorder</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Preorder: root, then subtrees left to right. Inorder: left subtree, root, right subtree. Postorder: subtrees, then root.</li><li>Apply the rule recursively to every subtree.</li><li>For a non-binary tree, inorder visits the first subtree, then the root, then the rest. In a BST inorder gives sorted order.</li></ul></div>
 <article class="q" id="c2-10b">
 <div class="qhead"><span class="tag">C2 Q10(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Find in-order, pre-order and post-order traversal of the given tree.</p>
@@ -1070,6 +1120,7 @@ Post: E D B H I F J G C A</pre>
 <p class="final">As listed above.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 2</span>Build a binary tree from two traversals</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Postorder ends with the root; preorder starts with it.</li><li>The root splits the inorder list into the left and right subtrees.</li><li>Repeat on each part with the matching segment of the other traversal. Inorder + one other traversal fixes the tree uniquely.</li></ul></div>
 <article class="q" id="n24-10a">
 <div class="qhead"><span class="tag">N24 Q10(A)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Construct the binary tree with inorder H D I B J E K A F C G and postorder H I D J K E B F G C A.</p>
@@ -1089,6 +1140,7 @@ Check preorder: A B D H I E J K C F G</pre>
 <p class="final">Tree as drawn (root A; B’s children D, E; C’s children F, G; D’s children H, I; E’s children J, K).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 3</span>Construct a tree; eccentricity, centre, radius, diameter</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Eccentricity e(v) = greatest distance from v to any vertex.</li><li>Radius = min e(v); diameter = max e(v); centre = vertices with e(v) = radius.</li><li>A tree has one centre or two adjacent centres; find it by deleting all leaves repeatedly.</li></ul></div>
 <article class="q" id="d1-9">
 <div class="qhead"><span class="tag">D1 Q9</span><span class="marks">2 + 3 + 5 marks</span></div>
 <p class="stmt">Stations: A is the root; B, C connected to A; D, E to B; F, G to C; H to E; I to G. (a) Construct the tree. (b) Preorder, inorder, postorder. (c) Eccentricity of all vertices, diameter, centre, radius.</p>
@@ -1115,6 +1167,7 @@ I          5   3  6  0     6</pre>
 <p class="final">Eccentricities A3, B4, C4, D5, E5, F5, G5, H6, I6. Radius 3, diameter 6 (H to I), centre {A}.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 4</span>List spanning trees</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>A spanning tree keeps every vertex and n − 1 edges, with no cycle.</li><li>Delete m − n + 1 edges (the nullity), one from each independent cycle.</li><li>Different choices of deleted edges give different spanning trees.</li></ul></div>
 <article class="q" id="j23-11b">
 <div class="qhead"><span class="tag">J23 Q11(b)</span><span class="marks">4 marks</span></div>
 <p class="stmt">Draw four distinct spanning trees of G.</p>
@@ -1128,6 +1181,7 @@ T4 = {ab, ad, de, ec}     (deleted ac, bc, cd)</pre>
 <p class="final">Any four of these (G has 21 spanning trees in total).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 5</span>Minimum spanning tree (Kruskal + Prim)</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Kruskal: sort edges ascending; accept an edge unless its ends are already connected; stop at n − 1 edges.</li><li>Prim: start anywhere; repeatedly add the cheapest edge leaving the current tree.</li><li>Both give the minimum total; equal weights can give different trees with the same total.</li><li>Show a table of every decision, then the edge list and total.</li></ul></div>
 <article class="q" id="c1-9">
 <div class="qhead"><span class="tag">C1 Q9</span><span class="marks">10 marks</span></div>
 <p class="stmt">Connect towns A–E at minimum cost. Costs ($1000): AB 12, AC 8, AD 10, BC 9, BD 6, BE 7, CD 5, CE 11, DE 4.</p>
@@ -1145,6 +1199,7 @@ T4 = {ab, ad, de, ec}     (deleted ac, bc, cd)</pre>
 <p class="final">Edges A–C, C–D, D–E, B–D. Minimum cost 8+5+4+6 = 23 thousand dollars.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 6</span>MST when edge weights are distances</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Euclidean distance d = √((x₁ − x₂)² + (y₁ − y₂)²) for each pair.</li><li>n points give a complete graph with C(n, 2) edges; tabulate them all.</li><li>Then run Kruskal on the distance table.</li></ul></div>
 <article class="q" id="d1-10">
 <div class="qhead"><span class="tag">D1 Q10</span><span class="marks">10 marks</span></div>
 <p class="stmt">Routers at A(10,20), B(30,10), C(25,35), D(50,25), E(45,5). Minimum total cable (acyclic network) by MST.</p>
@@ -1159,6 +1214,7 @@ CE √(20²+30²) = √1300 = 36.06     DE √(5²+20²)  = √425  = 20.62</pre
 <p class="final">Cables B–E, D–E, A–C, A–B; total ≈ 15.81 + 20.62 + 21.21 + 22.36 = 80.00 units.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 7</span>Fundamental circuits and cut-sets</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Branches = edges in T (n − 1); chords = the rest (m − n + 1).</li><li>Fundamental circuit of a chord = the chord + the unique tree path joining its ends.</li><li>Fundamental cut-set of a branch = remove it from T; take every edge of G joining the two pieces.</li><li>Each cut-set = its branch + the chords whose circuits contain that branch.</li></ul></div>
 <article class="q" id="c1-10">
 <div class="qhead"><span class="tag">C1 Q10</span><span class="marks">10 marks</span></div>
 <p class="stmt">For G and its spanning tree T, identify at least five fundamental circuits and fundamental cut-sets.</p>
@@ -1220,6 +1276,7 @@ Decomposition (notes' notation):
 <div><h4>Coverings: extra facts</h4><ul style="margin:0;padding-left:20px;font-size:.93rem"><li>An edge cover exists ⇔ G has no isolated vertex.</li><li>An edge cover of an n-vertex graph has at least ⌈n/2⌉ edges.</li><li>Minimal = nothing can be removed; minimum = smallest size. Every minimum cover is minimal, not conversely.</li><li>No minimal edge cover contains a cycle.</li><li>A spanning tree and a Hamiltonian cycle are both edge covers.</li><li>Maximal matching = no edge can be added; maximum matching = the largest maximal matching.</li></ul><p class="note" style="margin-top:8px"><b>Notation varies:</b> javatpoint writes α₁ for the edge covering number and α₂ for the vertex covering number; other books write α₀ for vertex covering. Use your faculty’s symbols, and write the words once (“vertex covering number α₂ = 5”) so the meaning is clear.</p></div>
 </div></div>
 <h3 class="topic"><span class="tn">Type 1</span>Chromatic number and chromatic partition</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>χ(G) = least number of colours so adjacent vertices differ.</li><li>Lower bound: largest clique (triangle ⇒ ≥ 3). Upper bound: an actual colouring.</li><li>Welsh–Powell: colour vertices in decreasing degree order, reusing a colour whenever possible.</li><li>Chromatic partition = the colour classes; each class is an independent set.</li></ul></div>
 <article class="q" id="c2-12a">
 <div class="qhead"><span class="tag">C2 Q12(a)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Determine the chromatic number and a chromatic partition of the vertex set.</p>
@@ -1234,6 +1291,7 @@ Check every edge joins different colours ✓</pre>
 <p class="final">χ = 3; chromatic partition {a, e, i}, {b, d, g}, {c, f, h, j}.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 2</span>Chromatic polynomial</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>P(G, k) = number of proper colourings using at most k colours.</li><li>Kₙ: k(k−1)…(k−n+1). Tree: k(k−1)ⁿ⁻¹. Cₙ: (k−1)ⁿ + (−1)ⁿ(k−1). Pendant vertex: × (k − 1).</li><li>Decomposition: P(G) = P(G − e) − P(G / e); for non-adjacent u, v: P(G) = P(G + uv) + P(G with u, v merged).</li><li>χ = smallest k with P(G, k) > 0.</li></ul></div>
 <article class="q" id="n24-12">
 <div class="qhead"><span class="tag">N24 Q12</span><span class="marks">10 marks</span></div>
 <p class="stmt">Chromatic number and chromatic polynomial of the graph on 1–6.</p>
@@ -1253,6 +1311,7 @@ P(G) = (k−1)·P(H) = k(k−1)²(k−2)(k² − 4k + 5)
 <p class="final">χ = 3; P(G,k) = k(k−1)²(k−2)(k² − 4k + 5).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 3</span>Show a polynomial is not chromatic</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>A chromatic polynomial of an n-vertex, m-edge graph has degree n and leading coefficient 1.</li><li>Coefficient of kⁿ⁻¹ is −m, constant term 0, coefficients alternate in sign.</li><li>P(G, k) ≥ 0 for every positive integer k. Violating any one of these ⇒ not chromatic.</li></ul></div>
 <article class="q" id="c2-12b">
 <div class="qhead"><span class="tag">C2 Q12(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">Show that k³ − 4k² + k is not the chromatic polynomial of any graph.</p>
@@ -1263,6 +1322,7 @@ P(G) = (k−1)·P(H) = k(k−1)²(k−2)(k² − 4k + 5)
 <p class="final">Not a chromatic polynomial (it would need 4 edges on 3 vertices, and P(1) = −2 &lt; 0).</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 4</span>Exam scheduling by colouring</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Model: vertex = course; edge = two courses taken by a common student; colour = exam period.</li><li>Minimum number of periods = χ(G).</li><li>Lower bound from a clique (courses that all conflict pairwise); upper bound from a Welsh–Powell colouring.</li></ul></div>
 <article class="q" id="c1-12">
 <div class="qhead"><span class="tag">C1 Q12</span><span class="marks">5 + 2 + 3 marks</span></div>
 <p class="stmt">Students take these course combinations: {Ma, En, Bi, Ch}, {Ma, En, CS, Ge}, {Bi, Ps, Ge, Sp}, {Bi, CS, Hi, Fr}, {En, Ps, Hi, CS}, {Ps, Ch, CS, Fr}, {Ps, Ge, Hi, Sp}. (a) Minimum number of exam periods? (b) A schedule. (c) Bipartite graph and its use.</p>
@@ -1286,6 +1346,7 @@ Colour 6: Hi</pre>
 <p class="final">(a) 6 periods. (b) P1 Biology; P2 Computer Science, Spanish; P3 Psychology, Mathematics; P4 English, French; P5 Geography, Chemistry; P6 History.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 5</span>Bipartite matching problem (Hall / König)</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Matching: edges with no shared vertex. Perfect matching covers every vertex (needs |X| = |Y|).</li><li>Hall: X can be fully matched ⇔ every subset S of X has at least |S| neighbours.</li><li>König (bipartite only): maximum matching size = minimum vertex cover size.</li><li>Match the most constrained vertices (fewest options) first.</li></ul></div>
 <article class="q" id="c2-11">
 <div class="qhead"><span class="tag">C2 Q11</span><span class="marks">5 × 2 marks</span></div>
 <p class="stmt">Arun: P1–P7; Bina: P1, P2; Chetan: P2; Divya: P3, P6; Esha: P4, P5; Farhan: P4, P6, P7; Gopal: P6, P7. (a) Bipartite graph (b) maximum matching (c) perfect? (d) without Arun (e) minimum vertex cover.</p>
@@ -1298,6 +1359,7 @@ Colour 6: Hi</pre>
 <p class="final">Perfect matching Bina–P1, Chetan–P2, Divya–P3, Farhan–P4, Esha–P5, Gopal–P6, Arun–P7. Without Arun: maximum 6, not perfect. Minimum vertex cover size 7.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 6</span>Matching and vertex cover in a general graph</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Any vertex cover needs a distinct vertex for each edge of a matching, so α₀ ≥ maximum matching.</li><li>In non-bipartite graphs this can be strict; a triangle alone needs 2 cover vertices.</li><li>Gallai (no isolated vertices): vertex covering number + independence number = n.</li></ul></div>
 <article class="q" id="c1-11">
 <div class="qhead"><span class="tag">C1 Q11</span><span class="marks">5 + 5 marks</span></div>
 <p class="stmt">(a) Find a maximum matching and check whether it is perfect. (b) Find a minimum vertex cover.</p>
@@ -1309,6 +1371,7 @@ Colour 6: Hi</pre>
 <p class="final">Perfect matching {ae, fg, bc, dh}. Minimum vertex cover {b, d, e, g, h}, size 5.</p>
 </div></article>
 <h3 class="topic"><span class="tn">Type 7</span>Minimal vertex and edge coverings</h3>
+<div class="concept"><p class="ck">Concept used</p><ul><li>Minimal = no element can be removed. Minimum = smallest possible size. Every minimum is minimal, not conversely.</li><li>Edge cover exists ⇔ no isolated vertex; it has at least ⌈n/2⌉ edges; edge covering number = n − maximum matching.</li><li>A perfect matching is a minimum edge cover.</li><li>Lower bounds for vertex covers: disjoint edges need 1 each, disjoint triangles need 2 each.</li></ul></div>
 <article class="q" id="a23-11b">
 <div class="qhead"><span class="tag">A23 Q11(b)</span><span class="marks">5 marks</span></div>
 <p class="stmt">In the 4×4 grid graph (a–p) find two minimal vertex covers, two minimal edge covers, the vertex covering number and the edge covering number.</p>
